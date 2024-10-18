@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dmitri Savitskyi - The Start of Apocalypse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Фон с видео */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 80%;
+            min-height: 80%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        /* Поисковая строка */
+        .search-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .search-container input[type="text"] {
+            width: 600px;
+            padding: 10px;
+            font-size: 12px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            outline: none;
+            caret-color: white;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .search-container input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .search-icon {
+            color: white;
+            margin-right: 10px;
+            font-size: 26px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .search-icon::before {
+            content: "\2671"; /* Юникод для лупы */
+            font-size: 20px;
+        }
+
+        
+       /* Стиль для результатов поиска */
+        .search-results {
+            position: absolute; /* Абсолютное позиционирование */
+            top: 100%; /* Результаты появятся сразу под строкой поиска */
+            left: 0;
+            margin-top: 10px; /* Отступ между строкой поиска и результатами */
+            font-family: "Courier New", Courier, monospace;
+            color: white;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 600px;
+        }
+
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .search-results ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 5px;
+            opacity: 0;
+            transform: translateX(-20px); /* Начальное смещение */
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .search-results ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Анимация при появлении */
+        .search-results.show {
+            display: block;
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        /* Анимация для каждого элемента при появлении */
+        .search-results.show ul li:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .search-results.show ul li:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .search-results.show ul li:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .search-results.show ul li:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .search-results.show ul li:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        /* Анимация при скрытии */
+        .search-results.hide {
+            opacity: 0;
+            transform: scaleY(0);
+        }
+
+        /* Анимация для каждого элемента при скрытии */
+        .search-results.hide ul li {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-container">
+    <video autoplay loop muted playsinline>
+        <source src="background1.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div class="search-container">
+    <span class="search-icon"></span>
+    <input type="text" placeholder="Dev by Dmitri Savitskyi" onfocus="showResults()" onblur="hideResults()">
+    <div class="search-results" id="searchResults">
+        <ul>
+            <li><a href="nn.html" target="_blank">Research</a></li>
+            <li><a href="https://example.com/page2" target="_blank">Catalogue</a></li>
+            <li><a href="https://example.com/page3" target="_blank">Volume &#8544; Do angels really exist?</a></li>
+            <li><a href="nn.html" target="_blank"> Volume &#8545; Monastery as the embodyment of hypocrisy</a></li>
+            <li><a href="nn.html" target="_blank">Volume &#8546; Flesh and wires</a></li>
+             <li><a href="nn.html" target="_blank">Photo collage</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+   function showResults() {
+        const results = document.getElementById('searchResults');
+        const listItems = results.querySelectorAll('ul li');
+
+        results.classList.remove('hide');
+        results.classList.add('show');
+
+        listItems.forEach((li) => {
+            li.style.opacity = 1;
+            li.style.transform = 'translateX(0)'; /* Эффект плавного появления */
+        });
+    }
+
+    function hideResults() {
+        const results = document.getElementById('searchResults');
+        const listItems = results.querySelectorAll('ul li');
+
+        listItems.forEach((li) => {
+            li.style.opacity = 0;
+            li.style.transform = 'translateX(-50px)'; /* Эффект плавного скрытия */
+        });
+
+        setTimeout(() => {
+            results.classList.remove('show');
+            results.classList.add('hide');
+        }, 700); /* Время на завершение анимации перед скрытием */
+    }
+</script>
+
+</body>
+</html>
